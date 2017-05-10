@@ -4,10 +4,12 @@
 {% if scene_template %}
 
 <h1>Template Scene</h1>
+{% for scene in scene_template %}
 
 <ul>
-    <p>{{ scene_template|linebreaksbr }}</p>
+    <p>{{ scene|linebreaksbr }}</p>
 </ul>
+{% endfor %}
 {% else %}
 <p>No templates are available.</p>
 {% endif %}

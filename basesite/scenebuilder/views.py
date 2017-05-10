@@ -8,6 +8,8 @@ def index(request):
 
 class IndexView(generic.ListView):
     model = template.MapDoc.scene_grid0
+    model1 = template.MapDoc.scene_grid1
+    model2 = template.MapDoc.scene_grid2
 
     i = 0
     for line in model:
@@ -19,4 +21,4 @@ class IndexView(generic.ListView):
     context_object_name = 'scene_template'
 
     def get_queryset(self):
-        return self.model
+        return [self.model,self.model1,self.model2]
