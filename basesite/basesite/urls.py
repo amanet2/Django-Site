@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^$',views.index, name='index'),
     url(r'^apps/', views.index, name='index'),
     url(r'^polls/', include('polls.urls')),
+    url(r'^scenebuilder/', include('scenebuilder.urls')),
     url(r'^admin/', admin.site.urls),
 ]
