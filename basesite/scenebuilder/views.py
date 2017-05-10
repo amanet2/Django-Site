@@ -6,12 +6,17 @@ from .custom import template
 def index(request):
     return render(request,'scenebuilder/index.html')
 
-class IndexView(generic.DetailView):
+class IndexView(generic.ListView):
     model = template.MapDoc.scene_grid0
+
+    i = 0
+    for line in model:
+        if i != 0 and i%30 == 0:
+            line += '\n'
+            print('yes')
+
     template_name = 'scenebuilder/index.html'
+    context_object_name = 'scene_template'
 
     def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
-        return Question.objects.filter(pub_date__lte=timezone.now())
+        return self.model

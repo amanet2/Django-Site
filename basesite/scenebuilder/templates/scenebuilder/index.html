@@ -1,6 +1,13 @@
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
-<body>
-    <p>hello</p>
-</body>
+{% if scene_template %}
+
+<h1>Template Scene</h1>
+
+<ul>
+    <p>{{ scene_template|linebreaksbr }}</p>
+</ul>
+{% else %}
+<p>No templates are available.</p>
+{% endif %}
