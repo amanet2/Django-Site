@@ -1,4 +1,4 @@
-from models.clients import Map,Scene,Object,Entity
+from ..scene_models.clients import Map,Scene,Object,Entity
 
 class SceneUtils:
     def __init__(self,m:Map):

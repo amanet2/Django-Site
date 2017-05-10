@@ -1,5 +1,5 @@
-from models.clients import Map,Scene,Object,Entity
-from utils.scene_utils import SceneUtils
+from ..scene_models.clients import Map,Scene,Object,Entity
+from ..utils.scene_utils import SceneUtils
 
 class MapDoc():
     new_map = Map('custom')
@@ -62,7 +62,7 @@ class MapDoc():
 
     scene0 = Scene('test-scene1','dungeonBackground.jpg',new_map.scene_size,new_map.scene_size)
 
-    scene_grid = '''
+    scene_grid0 = '''
 -,-,-,-,-,-,-,-,-,0,0,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
 -,-,-,-,-,-,-,-,0,~,*,",0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
 -,-,-,0,0,0,-,-,0,*,*,*,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
@@ -95,13 +95,13 @@ class MapDoc():
 -,-,-,-,0,0,0,0,0,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
 '''
 
-    scene_utils.things_setup_from_grid(scene0,scene_grid)
+    scene_utils.things_setup_from_grid(scene0,scene_grid0)
 
     # =====
 
     scene1 = Scene('test-scene2','dungeonBackground.jpg',new_map.scene_size,new_map.scene_size)
 
-    scene_grid = '''
+    scene_grid1 = '''
 -,-,-,0,0,0,0,0,0,0,-,-,-,-,-,-,-,-,-,-,0,0,0,0,0,0,-,-,-,-,
 -,-,0,2,1,1,1,1,1,4,0,-,-,-,-,-,-,-,-,0,2,1,1,1,1,4,0,-,-,-,
 -,-,0,1,1,1,p,1,1,1,0,-,-,-,-,-,-,-,-,0,1,1,1,1,1,1,0,-,-,-,
@@ -134,13 +134,13 @@ class MapDoc():
 -,-,-,-,-,-,-,-,-,-,-,-,-,-,-,0,0,0,0,0,0,-,-,-,-,-,-,-,-,-,
 '''
 
-    scene_utils.things_setup_from_grid(scene1,scene_grid)
+    scene_utils.things_setup_from_grid(scene1,scene_grid1)
 
     # =====
 
     scene2 = Scene('test-scene3','winbackground.jpg',new_map.scene_size,new_map.scene_size)
 
-    scene_grid = '''
+    scene_grid2 = '''
 -,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
 -,-,0,0,0,0,0,0,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
 -,0,&,#,#,#,#,#,$,0,-,-,-,-,-,0,0,0,0,0,-,-,-,-,-,-,-,-,-,-,
@@ -173,7 +173,7 @@ class MapDoc():
 -,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,0,0,0,0,0,0,-,-,-,-,
 '''
 
-    scene_utils.things_setup_from_grid(scene2,scene_grid)
+    scene_utils.things_setup_from_grid(scene2,scene_grid2)
 
     # ====
 
