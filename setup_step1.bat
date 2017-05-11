@@ -1,2 +1,0 @@
-virtualenv venv_django
-venv_django\Scripts\activate
