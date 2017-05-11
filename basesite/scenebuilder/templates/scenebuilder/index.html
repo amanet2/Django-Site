@@ -1,12 +1,8 @@
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
-{% if scene_template %}
-
-<h1>Template Scenes</h1>
+{% extends "scenebuilder/base.html" %}
+{% block content %}
 <h2>Dictionary of Objects</h2>
+{% if scene_template %}
 {% for scene in scene_template %}
-
 <ul>
     <hr>
     <p>{{ scene|linebreaksbr }}</p>
@@ -15,3 +11,4 @@
 {% else %}
 <p>No templates are available.</p>
 {% endif %}
+{% endblock %}

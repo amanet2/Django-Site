@@ -1,6 +1,5 @@
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+{% extends "scenebuilder/base.html" %}
+{% block content %}
 {% if scene_template %}
 
 <h1>Template Scenes</h1>
@@ -15,3 +14,4 @@
 {% else %}
 <p>No templates are available.</p>
 {% endif %}
+{% endblock %}
