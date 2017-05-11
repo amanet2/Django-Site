@@ -9,10 +9,6 @@ def index(request):
 class IndexView(generic.ListView):
     returnlist = []
     mapname = template.MapDoc.new_map.source
-    scenesize = template.MapDoc.new_map.scene_size
-    cellsize = template.MapDoc.new_map.cell_size
-    returnlist.append(f'{mapname}.scene_size - {scenesize}')
-    returnlist.append(f'{mapname}.cell_size - {cellsize}')
 
     for scene in template.MapDoc.new_map.scenes:
         returnlist.append(f'Scene {mapname}/{scene.name}')
