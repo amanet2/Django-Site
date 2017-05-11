@@ -61,3 +61,12 @@ class CodesView(generic.ListView):
 
     def get_queryset(self):
         return self.returnlist
+
+class BuildYourOwnView(generic.ListView):
+    returnlist = [template.MapDoc.scene_grid0]
+
+    template_name = 'scenebuilder/buildyourown.html'
+    context_object_name = 'scene_template'
+
+    def get_queryset(self):
+        return self.returnlist
