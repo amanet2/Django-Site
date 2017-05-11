@@ -1,5 +1,5 @@
 # Django-Site
-In action: ![screenm](screen.jpg?raw=true "Oscreen")
+In action: ![screen](screen.jpg?raw=true "Oscreen")
 Quick Instructions
 ===
 ## Create Virtual Environment
