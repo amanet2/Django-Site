@@ -1,7 +1,5 @@
 # Django-Site
-
-## Python 3.6
-From this guide: https://docs.djangoproject.com/en/1.11/intro/
+In action: ![screen](screen.jpg?raw=true "Oscreen")
 
 Quick Instructions
 ===

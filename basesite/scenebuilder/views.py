@@ -7,16 +7,61 @@ def index(request):
     return render(request,'scenebuilder/index.html')
 
 class IndexView(generic.ListView):
-    model = template.MapDoc.scene_grid0
+    returnlist = []
+    mapname = template.MapDoc.new_map.source
+    scenesize = template.MapDoc.new_map.scene_size
+    cellsize = template.MapDoc.new_map.cell_size
+    returnlist.append(f'{mapname}.scene_size - {scenesize}')
+    returnlist.append(f'{mapname}.cell_size - {cellsize}')
 
-    i = 0
-    for line in model:
-        if i != 0 and i%30 == 0:
-            line += '\n'
-            print('yes')
+    for scene in template.MapDoc.new_map.scenes:
+        returnlist.append(f'Scene {mapname}/{scene.name}')
 
     template_name = 'scenebuilder/index.html'
     context_object_name = 'scene_template'
 
     def get_queryset(self):
-        return self.model
+        return self.returnlist
+
+class TemplateView(generic.ListView):
+    returnlist = []
+    scene_grids = [
+        template.MapDoc.scene_grid0,
+        template.MapDoc.scene_grid1,
+        template.MapDoc.scene_grid2
+    ]
+    i=0
+    for scene in template.MapDoc.new_map.scenes:
+        returnlist.append(scene.name)
+        returnlist.append(scene_grids[i])
+        i+=1
+
+    template_name = 'scenebuilder/templates.html'
+    context_object_name = 'scene_template'
+
+    def get_queryset(self):
+        return self.returnlist
+
+class DictionaryView(generic.ListView):
+    returnlist = []
+    scene_dict = template.MapDoc.new_map.obj_defs
+    for key in scene_dict:
+        returnlist.append(f'{key}: {scene_dict[key]}')
+
+    template_name = 'scenebuilder/dictionary.html'
+    context_object_name = 'scene_template'
+
+    def get_queryset(self):
+        return self.returnlist
+
+class CodesView(generic.ListView):
+    returnlist = []
+    code_dict = template.MapDoc.new_map.obj_codes
+    for key in code_dict:
+        returnlist.append(f'{key}: {code_dict[key]}')
+
+    template_name = 'scenebuilder/objects.html'
+    context_object_name = 'scene_template'
+
+    def get_queryset(self):
+        return self.returnlist

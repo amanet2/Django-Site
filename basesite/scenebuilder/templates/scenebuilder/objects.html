@@ -1,0 +1,14 @@
+{% extends "scenebuilder/base.html" %}
+{% block content %}
+<h2>custom Objects & Codes</h2>
+{% if scene_template %}
+{% for scene in scene_template %}
+<ul>
+    <hr>
+    <p>{{ scene|linebreaksbr }}</p>
+</ul>
+{% endfor %}
+{% else %}
+<p>No templates are available.</p>
+{% endif %}
+{% endblock %}
