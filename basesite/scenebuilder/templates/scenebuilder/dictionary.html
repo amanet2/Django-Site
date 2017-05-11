@@ -1,6 +1,11 @@
 {% extends "scenebuilder/base.html" %}
 {% block content %}
 <h2>custom Dictionary of Objects</h2>
+<h3>
+    The mapmapker uses this dictionary to include
+    the resource reference for every object that
+    will be created in the mapfile
+</h3>
 {% if scene_template %}
 {% for scene in scene_template %}
 <ul>

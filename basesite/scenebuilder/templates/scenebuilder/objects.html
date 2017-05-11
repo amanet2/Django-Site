@@ -1,6 +1,11 @@
 {% extends "scenebuilder/base.html" %}
 {% block content %}
 <h2>custom Objects & Codes</h2>
+<h3>
+    Python mapmaker reads these codes from a template grid
+    and looks up the necessary resource for creating a game
+    object, entity, or scenery tile
+</h3>
 {% if scene_template %}
 {% for scene in scene_template %}
 <ul>
