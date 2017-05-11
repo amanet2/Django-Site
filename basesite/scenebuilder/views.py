@@ -7,13 +7,18 @@ def index(request):
     return render(request,'scenebuilder/index.html')
 
 class IndexView(generic.ListView):
-    model = template.MapDoc.scene_grid0
-    model1 = template.MapDoc.scene_grid1
-    model2 = template.MapDoc.scene_grid2
+    returnlist = []
+
+    returnlist.append(template.MapDoc.scene_grid0)
+    returnlist.append(template.MapDoc.scene_grid1)
+    returnlist.append(template.MapDoc.scene_grid2)
+
     scene_dict = template.MapDoc.new_map.obj_codes
+    for key in scene_dict:
+        returnlist.append(f'{key}: {scene_dict[key]}')
 
     template_name = 'scenebuilder/index.html'
     context_object_name = 'scene_template'
 
     def get_queryset(self):
-        return [self.scene_dict,self.model,self.model1,self.model2]
+        return self.returnlist
