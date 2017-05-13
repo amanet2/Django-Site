@@ -16,12 +16,16 @@
 <script type="text/javascript">
 
 var grid = clickableGrid(30,30,function(el,row,col,i){
-    console.log("You clicked on element:",el);
-    console.log("You clicked on row:",row);
-    console.log("You clicked on col:",col);
-    console.log("You clicked on item #:",i);
+    var classname = el.className;
 
-    el.className='clicked';
+    if(classname=='empty')
+        el.className='scenery_block';
+    else if(classname=='scenery_block')
+        el.className='scenery_tree';
+    else if(classname=='scenery_tree')
+        el.className='empty';
+    else
+        el.className='scenery_block';
 });
 
 document.body.appendChild(grid);
