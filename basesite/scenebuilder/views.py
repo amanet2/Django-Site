@@ -1,10 +1,29 @@
 from django.shortcuts import render
 from django.views import generic
+from django.utils import timezone
 from .custom import template
+from .models import Map
 
 # Create your views here.
 def index(request):
     return render(request,'scenebuilder/index.html')
+
+class AllMapsView(generic.ListView):
+    template_name = 'scenebuilder/allmaps.html'
+    context_object_name = 'all_maps_list'
+
+    def get_queryset(self):
+        return Map.objects.all()
+
+class DetailView(generic.DetailView):
+    model = Map
+    template_name = 'scenebuilder/detail.html'
+
+    def get_queryset(self):
+        """
+        Excludes any questions that aren't published yet.
+        """
+        return Map.objects.filter(map_date__lte=timezone.now())
 
 class IndexView(generic.ListView):
     returnlist = []
@@ -63,7 +82,9 @@ class CodesView(generic.ListView):
         return self.returnlist
 
 class BuildYourOwnView(generic.ListView):
-    returnlist = [template.MapDoc.scene_grid0]
+    returnlist = []
+    for var in template.MapDoc.new_map.obj_defs:
+        returnlist.append(var)
 
     template_name = 'scenebuilder/buildyourown.html'
     context_object_name = 'scene_template'

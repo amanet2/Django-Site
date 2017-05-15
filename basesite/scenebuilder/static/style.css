@@ -19,25 +19,41 @@ p, hr           { font-family: monospace; color:#7cfc00;}
                   border: 1px solid #aacbe2; }
 .error          { background: #f0d6d6; padding: 0.5em; }
 
+img {
+    height: auto;
+    max-width: 100%;
+}
+
 .grid { margin:1em auto; border-collapse:collapse }
 .grid td {
     cursor:pointer;
-    width:5px; height:5px;
+    width:15px; height:15px;
     border:1px solid #7cfc00;
     text-align:center;
     font-family:monospace; font-size:13px
 }
-.grid td.clicked {
-    background-color:yellow;
-    font-weight:bold; color:red;
+
+.grid td.occupied_noclip {
+    background-color:blue;
+    font-weight:bold; color:blue;
 }
 
-.grid td.scenery_block {
-    background-color:yellow;
-    font-weight:bold; color:red;
+.grid td.occupied_clip {
+    background-color:green;
+    font-weight:bold; color:green;
 }
 
-.grid td.scenery_tree {
+.grid td.occupied_bigred {
     background-color:red;
     font-weight:bold; color:red;
+}
+
+.grid td.occupied_portal {
+    background-color:yellow;
+    font-weight:bold; color:yellow;
+}
+
+.grid td.occupied_enemy {
+    background-color:orange;
+    font-weight:bold; color:orange;
 }

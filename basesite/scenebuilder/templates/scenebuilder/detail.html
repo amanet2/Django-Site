@@ -1,0 +1,9 @@
+{% extends "scenebuilder/base.html" %}
+{% block content %}
+
+<h1>{{ map.map_name }}</h1>
+<p>Created by: {{ map.map_author }}</p>
+<p>Date: {{ map.map_date }}</p>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% endblock %}

@@ -3,13 +3,11 @@
 {% if scene_template %}
 <h2>Build your own scene grid for Map: custom</h2>
 <h3>Python mapmaker uses these grids to generate a mapfile</h3>
-{% for scene in scene_template %}
-<ul>
-    <hr>
-    <p>Sample Grid</p>
-    <p>{{ scene|linebreaksbr }}</p>
-</ul>
-{% endfor %}
+<select size="3" id="selectiontable">  <!-- Note: I've removed the 'multiple' attribute -->
+    {% for scene in scene_template %}
+    <option>{{ scene|linebreaksbr }}</option>
+    {% endfor %}
+</select>
 {% else %}
 <p>No templates are available.</p>
 {% endif %}
@@ -17,15 +15,23 @@
 
 var grid = clickableGrid(30,30,function(el,row,col,i){
     var classname = el.className;
+    var objects = document.getElementById( "selectiontable" );
+    var selected_obj = objects.options[ objects.selectedIndex ].value;
 
-    if(classname=='empty')
-        el.className='scenery_block';
-    else if(classname=='scenery_block')
-        el.className='scenery_tree';
-    else if(classname=='scenery_tree')
-        el.className='empty';
+    if(selected_obj == "scenery_tree")
+        el.className='occupied_clip';
+    else if(selected_obj == "big_red")
+        el.className='occupied_bigred';
+    else if(selected_obj == "enemy")
+        el.className='occupied_enemy';
+    else if(selected_obj.includes("scenery"))
+        el.className='occupied_noclip';
+    else if(selected_obj.includes("portal"))
+        el.className='occupied_portal';
+    else if(classname != 'empty')
+        el.className = 'empty';
     else
-        el.className='scenery_block';
+        el.className='empty';
 });
 
 document.body.appendChild(grid);
@@ -38,7 +44,7 @@ function clickableGrid( rows, cols, callback ){
         var tr = grid.appendChild(document.createElement('tr'));
         for (var c=0;c<cols;++c){
             var cell = tr.appendChild(document.createElement('td'));
-            cell.innerHTML = ++i;
+            cell.innerHTML = "  ";
             cell.addEventListener('click',(function(el,r,c,i){
                 return function(){
                     callback(el,r,c,i);
