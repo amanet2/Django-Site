@@ -4,7 +4,7 @@ from .models import Map, Scene
 
 class SceneInLine(admin.TabularInline):
     model = Scene
-    extra = 3
+    extra = 0
 
 class MapAdmin(admin.ModelAdmin):
     fieldsets = [

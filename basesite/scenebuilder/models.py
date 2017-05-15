@@ -5,6 +5,7 @@ class Map(models.Model):
     map_name = models.CharField(max_length=32)
     map_date = models.DateTimeField('published on')
     map_author = models.CharField(max_length=32)
+    map_path = models.CharField(max_length=32)
 
     def __str__(self):
         return f'{self.map_name} - {self.map_author}/{self.map_date}'
