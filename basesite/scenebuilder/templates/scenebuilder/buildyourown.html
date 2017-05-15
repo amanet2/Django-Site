@@ -1,47 +1,67 @@
 {% extends "scenebuilder/base.html" %}
 {% block content %}
+<h3>
+    Every map for Game-Engine-Red can be split
+    up into a set of scenes, which can be manipulated
+    and switched between dynamically and instantly.
+    The python mapmaker generates mapfiles for the
+    Java-based engine to consume.
+</h3>
+<br></br>
 {% if scene_template %}
 <h2>Build your own scene grid for Map: custom</h2>
 <h3>Python mapmaker uses these grids to generate a mapfile</h3>
-{% for scene in scene_template %}
-<ul>
-    <hr>
-    <p>Sample Grid</p>
-    <p>{{ scene|linebreaksbr }}</p>
-</ul>
-{% endfor %}
+<select size="3" id="selectiontable">  <!-- Note: I've removed the 'multiple' attribute -->
+    {% for scene in scene_template %}
+    <option>{{ scene|linebreaksbr }}</option>
+    {% endfor %}
+</select>
 {% else %}
 <p>No templates are available.</p>
 {% endif %}
-<textarea rows="30" cols="60">-,-,-,-,-,-,-,-,-,0,0,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,-,-,-,-,-,0,~,*,",0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,0,0,0,-,-,0,*,*,*,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,0,~,*,",0,-,0,*,p,*,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,0,*,e,*,0,-,0,*,*,*,",0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,0,^,*,`,0,-,0,*,*,*,*,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,0,0,0,-,-,0,*,*,*,`,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,-,-,-,-,-,0,*,*,*,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,-,-,-,-,-,0,*,*,*,0,-,-,-,-,0,0,0,-,-,-,-,-,-,-,-,-,-,
--,-,-,-,-,-,-,0,~,*,*,*,",0,0,0,0,~,*,",0,0,0,0,0,0,0,0,0,-,
--,-,-,-,-,-,0,~,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,",0,
--,-,-,-,-,0,~,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,0,^,*,*,0,
--,-,-,-,0,~,*,*,*,*,*,*,*,*,*,*,*,*,*,*,0,^,*,*,*,",0,*,`,0,
--,-,-,0,~,*,*,*,*,*,*,*,`,0,0,^,*,*,*,*,",0,*,*,*,*,*,*,0,-,
--,-,-,0,*,*,*,*,*,*,*,*,0,-,-,0,^,*,*,*,*,*,*,*,*,e,*,*,0,-,
--,-,-,0,*,*,*,`,0,^,*,*,0,-,-,-,0,^,*,*,*,*,*,e,*,*,*,*,0,-,
--,-,-,0,^,*,*,0,-,0,*,*,",0,-,-,-,0,^,*,*,*,*,*,*,e,*,*,",0,
--,-,-,-,0,^,*,",0,~,*,*,*,0,-,-,-,-,0,*,*,*,*,*,*,*,*,n,*,0,
--,-,-,-,-,0,^,*,*,*,e,*,`,0,-,-,-,-,0,*,*,*,*,*,*,*,*,*,`,0,
--,-,-,-,-,-,0,*,*,*,*,`,0,-,-,-,-,0,~,*,*,`,0,0,0,0,0,0,0,-,
--,-,-,-,-,-,0,*,*,*,`,0,-,-,-,-,0,~,*,*,`,0,-,-,-,-,-,-,-,-,
--,-,-,-,-,-,0,*,*,*,0,-,-,-,-,0,~,*,*,`,0,-,-,-,-,-,-,-,-,-,
--,-,-,-,-,-,0,*,*,*,0,-,-,-,0,~,*,*,`,0,-,-,-,-,-,-,-,-,-,-,
--,-,-,-,-,-,0,*,*,*,",0,0,0,~,*,*,`,0,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,-,0,0,~,*,*,*,*,*,*,*,*,*,`,0,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,0,~,*,*,*,*,*,*,*,*,*,*,`,0,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,0,*,e,*,*,*,*,*,*,*,*,`,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,0,*,*,*,e,*,*,`,0,0,0,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,0,^,*,*,*,*,`,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
--,-,-,-,0,0,0,0,0,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
-</textarea>
+<script type="text/javascript">
+
+var grid = clickableGrid(30,30,function(el,row,col,i){
+    var classname = el.className;
+    var objects = document.getElementById( "selectiontable" );
+    var selected_obj = objects.options[ objects.selectedIndex ].value;
+
+    if(selected_obj == "scenery_tree")
+        el.className='occupied_clip';
+    else if(selected_obj == "big_red")
+        el.className='occupied_bigred';
+    else if(selected_obj == "enemy")
+        el.className='occupied_enemy';
+    else if(selected_obj.includes("scenery"))
+        el.className='occupied_noclip';
+    else if(selected_obj.includes("portal"))
+        el.className='occupied_portal';
+    else if(classname != 'empty')
+        el.className = 'empty';
+    else
+        el.className='empty';
+});
+
+document.body.appendChild(grid);
+
+function clickableGrid( rows, cols, callback ){
+    var i=0;
+    var grid = document.createElement('table');
+    grid.className = 'grid';
+    for (var r=0;r<rows;++r){
+        var tr = grid.appendChild(document.createElement('tr'));
+        for (var c=0;c<cols;++c){
+            var cell = tr.appendChild(document.createElement('td'));
+            cell.innerHTML = "  ";
+            cell.addEventListener('click',(function(el,r,c,i){
+                return function(){
+                    callback(el,r,c,i);
+                }
+            })(cell,r,c,i),false);
+        }
+    }
+    return grid;
+}
+
+</script>
 {% endblock %}

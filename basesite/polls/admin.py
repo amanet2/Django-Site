@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Question, Choice, Scene
+from .models import Question, Choice
 
 
 class ChoiceInline(admin.TabularInline):
@@ -17,10 +17,4 @@ class QuestionAdmin(admin.ModelAdmin):
     list_filter = ['pub_date']
     search_fields = ['question_text']
 
-class SceneAdmin(admin.ModelAdmin):
-    fields = ['create_date', 'scene_author', 'scene_name']
-    list_display = ('scene_name','scene_author', 'create_date')
-    search_fields = ['scene_name', 'scene_author']
-
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Scene, SceneAdmin)

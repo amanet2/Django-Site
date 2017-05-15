@@ -1,0 +1,16 @@
+{% extends "scenebuilder/base.html" %}
+{% block content %}
+{% if all_maps_list %}
+
+<h1>Published Maps</h1>
+
+<ul>
+    {% for map in all_maps_list %}
+    <li><a href="{% url 'scenebuilder:detail' map.id %}">{{ map.map_name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No maps are available.</p>
+{% endif %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% endblock %}
