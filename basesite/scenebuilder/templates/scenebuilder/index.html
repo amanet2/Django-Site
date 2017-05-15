@@ -1,24 +1,6 @@
 {% extends "scenebuilder/base.html" %}
 {% block content %}
-<h2><a href="/scenebuilder/templates">Scenes for Map: custom</a></h2>
-<h3>
-    Every map for Game-Engine-Red can be split
-    up into a set of scenes, which can be manipulated
-    and switched between dynamically and instantly.
-    The python mapmaker generates mapfiles for the
-    Java-based engine to consume.
-</h3>
-{% if scene_template %}
-{% for scene in scene_template %}
-<ul>
-    <hr>
-    <p>{{ scene|linebreaksbr }}</p>
-</ul>
-{% endfor %}
-{% else %}
-<p>No templates are available.</p>
-{% endif %}
-<h2>Scene Builder Details</h2>
+<h2>Game Engine Details</h2>
 <ul>
     <p>
         Game-Engine-Red is a simple 2D game maker

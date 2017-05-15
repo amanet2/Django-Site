@@ -1,9 +1,13 @@
 {% extends "scenebuilder/base.html" %}
 {% block content %}
-
-<h1>{{ map.map_name }}</h1>
+<h2>{{ map.map_name }}</h2>
+<h3><a href="/scenebuilder/templates">Scenes for Map: {{ map.map_name }}</a></h3>
+<h3><a href="/scenebuilder/dictionary">Dictionary for Map: {{ map.map_name }}</a></h3>
 <p>Created by: {{ map.map_author }}</p>
 <p>Date: {{ map.map_date }}</p>
-
+<form action="{% url 'scenebuilder:download' map.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Download This Map" />
+</form>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 {% endblock %}

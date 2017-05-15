@@ -1,12 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.utils import timezone
 from .custom import template
 from .models import Map
+import os
+from django.conf import settings
+from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
     return render(request,'scenebuilder/index.html')
+
+
+
+def download(request, map_id):
+    map = get_object_or_404(Map, pk=map_id)
+
+    file_path = os.path.join(settings.MEDIA_ROOT, f'downloadable_maps/{map_id}.map')
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    return HttpResponse
 
 class AllMapsView(generic.ListView):
     template_name = 'scenebuilder/allmaps.html'
