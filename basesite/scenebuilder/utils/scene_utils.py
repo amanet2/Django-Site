@@ -52,7 +52,7 @@ class SceneUtils:
         grid = grid.replace(',','')
         grid = grid.replace('\n','')
 
-
+        self.map.scene_grids.append(grid)
         self.map.cell_size = int(scene_size/grid_rows)
         for i in range(0,grid_rows):
             for j in range(0,grid_rows):
