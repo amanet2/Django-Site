@@ -7,11 +7,11 @@
     The python mapmaker generates mapfiles for the
     Java-based engine to consume.
 </h3>
-<br></br>
 {% if scene_template %}
+<ul></ul>
 <h2>Build your own scene grid for Map: custom</h2>
 <h3>Python mapmaker uses these grids to generate a mapfile</h3>
-<select size="3" id="selectiontable">  <!-- Note: I've removed the 'multiple' attribute -->
+<select size="4" id="selectiontable">
     {% for scene in scene_template %}
     <option>{{ scene|linebreaksbr }}</option>
     {% endfor %}
@@ -19,25 +19,42 @@
 {% else %}
 <p>No templates are available.</p>
 {% endif %}
+
 <script type="text/javascript">
 
 var grid = clickableGrid(30,30,function(el,row,col,i){
     var classname = el.className;
     var objects = document.getElementById( "selectiontable" );
     var selected_obj = objects.options[ objects.selectedIndex ].value;
+    var cell_img = el.appendChild(document.createElement('img'));
 
-    if(selected_obj == "scenery_tree")
-        el.className='occupied_clip';
-    else if(selected_obj == "big_red")
-        el.className='occupied_bigred';
-    else if(selected_obj == "enemy")
-        el.className='occupied_enemy';
-    else if(selected_obj.includes("scenery"))
-        el.className='occupied_noclip';
-    else if(selected_obj.includes("portal"))
-        el.className='occupied_portal';
-    else if(classname != 'empty')
+    var map = {"enemy":"/static/images/bigRed180_evil.png"}
+
+    var selected_name = selected_obj.split("-")[0];
+    console.log(selected_name);
+    var selected_rsc = selected_obj.split("-")[1];
+    console.log(selected_rsc);
+
+
+    if(classname != 'empty') {
         el.className = 'empty';
+        while (el.firstChild) {
+            el.removeChild(el.firstChild);
+        }
+    }
+    else {
+        cell_img.src="/static/images/"+selected_rsc;
+    }
+
+    if(selected_name == "enemy"){
+        el.className='occupied_enemy';
+    }
+    else if(selected_name == "big_red")
+        el.className='occupied_bigred';
+    else if(selected_name.includes("scenery"))
+        el.className='occupied_noclip';
+    else if(selected_name.includes("portal"))
+        el.className='occupied_portal';
     else
         el.className='empty';
 });
@@ -52,7 +69,7 @@ function clickableGrid( rows, cols, callback ){
         var tr = grid.appendChild(document.createElement('tr'));
         for (var c=0;c<cols;++c){
             var cell = tr.appendChild(document.createElement('td'));
-            cell.innerHTML = "  ";
+            cell.className = 'empty';
             cell.addEventListener('click',(function(el,r,c,i){
                 return function(){
                     callback(el,r,c,i);

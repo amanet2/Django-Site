@@ -99,8 +99,9 @@ class CodesView(generic.ListView):
 
 class BuildYourOwnView(generic.ListView):
     returnlist = []
-    for var in template.MapDoc.new_map.obj_defs:
-        returnlist.append(var)
+    obj_map = template.MapDoc.new_map.obj_defs
+    for var in obj_map:
+        returnlist.append(f'{var}-{obj_map[var]}')
 
     template_name = 'scenebuilder/buildyourown.html'
     context_object_name = 'scene_template'
