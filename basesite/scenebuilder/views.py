@@ -8,11 +8,6 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.http import Http404
 
-# Create your views here.
-def index(request):
-    return render(request,'scenebuilder/index.html')
-
-
 
 def download(request,pk):
     map = get_object_or_404(Map, pk=pk)
@@ -38,9 +33,6 @@ class DetailView(generic.DetailView):
     template_name = 'scenebuilder/detail.html'
 
     def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
         return Map.objects.filter(map_date__lte=timezone.now())
 
 class TemplateView(generic.DetailView):

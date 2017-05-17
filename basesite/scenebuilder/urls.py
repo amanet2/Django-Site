@@ -5,7 +5,6 @@ from . import views
 app_name='scenebuilder'
 urlpatterns = [
     # ex: /scenebuilder/
-    # url(r'^$', views.index, name='index'),
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^(?P<pk>[0-9]+)/scenes/$', views.TemplateView.as_view(), name='templates'),
     url(r'^dictionary/$', views.DictionaryView.as_view(), name='dictionary'),
