@@ -1,13 +1,11 @@
-import config
+from ..custom import template
 
-def import_template(templ) -> dict:
+def import_template() -> dict:
     line_buffer = []
-    map_source = templ.MapDoc.new_map.source
-
-    line_buffer.append(f'map {map_source}')
-    prefix = f'{config.maps_dir}/{map_source}'
-    for scene in templ.MapDoc.new_map.scenes:
-        line_buffer.append(f'scene {scene.name}')
+    line_buffer.append(f'map custom')
+    prefix = f'maps/custom'
+    for scene in template.MapDoc.new_map.scenes:
+        line_buffer.append(f'scene custom_scene')
         line_buffer.append(f'background {prefix}/{scene.background.path} {scene.background.size_x} {scene.background.size_y}')
         for entity in scene.entities:
             line_buffer.append('entity {}/{} {} {} {} {} {}/{} {} {}'.format(prefix,entity.path,entity.spawn_x,entity.spawn_y,entity.size_x,entity.size_y,prefix,entity.animation_path,entity.animation_rate,entity.does_clip))
@@ -23,8 +21,7 @@ def write_file(line_buffer,title):
             wtr.write(f'{line}\n')
 
 if __name__ == '__main__':
-    for template in config.templates:
-        map_buffer = import_template(template)
-        write_file(map_buffer,template.MapDoc.new_map.source)
-        source=template.MapDoc.new_map.source
-        print(f'Generated map {config.Java_Src_Dir}/{config.maps_dir}/{source}/{source}.map\n')
+    map_buffer = import_template(template)
+    write_file(map_buffer,template.MapDoc.new_map.source)
+    source=template.MapDoc.new_map.source
+    print(f'Generated map {config.Java_Src_Dir}/{config.maps_dir}/{source}/{source}.map\n')

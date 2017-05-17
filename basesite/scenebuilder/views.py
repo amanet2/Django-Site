@@ -54,25 +54,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return self.returnlist
 
-class TemplateView(generic.ListView):
-    returnlist = []
-    scene_grids = [
-        template.MapDoc.scene_grid0,
-        template.MapDoc.scene_grid1,
-        template.MapDoc.scene_grid2
-    ]
-    i=0
-    for scene in template.MapDoc.new_map.scenes:
-        returnlist.append(scene.name)
-        returnlist.append(scene_grids[i])
-        i+=1
-
-    template_name = 'scenebuilder/templates.html'
-    context_object_name = 'scene_template'
-
-    def get_queryset(self):
-        return self.returnlist
-
 class DictionaryView(generic.ListView):
     returnlist = []
     scene_dict = template.MapDoc.new_map.obj_defs
