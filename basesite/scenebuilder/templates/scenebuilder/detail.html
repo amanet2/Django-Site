@@ -1,7 +1,8 @@
 {% extends "scenebuilder/base.html" %}
 {% block content %}
 <h2>{{ map.map_name }}</h2>
-<h3><a href="scenes">Scenes for Map: {{ map.map_name }}</a></h3>
+<h3><a href="{% url 'scenebuilder:templates' map.id %}">Scenes for Map: {{ map.map_name }}</a></h3>
+<!--<h3><a href="scenes">Scenes for Map: {{ map.map_name }}</a></h3>-->
 <p>Created by: {{ map.map_author }}</p>
 <p>Date: {{ map.map_date }}</p>
 <form action="{% url 'scenebuilder:download' map.id %}" method="post">

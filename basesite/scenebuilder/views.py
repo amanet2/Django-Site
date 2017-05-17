@@ -41,6 +41,13 @@ class DetailView(generic.DetailView):
         """
         return Map.objects.filter(map_date__lte=timezone.now())
 
+class TemplateView(generic.DetailView):
+    model = Map
+    template_name = 'scenebuilder/templates.html'
+
+    def get_queryset(self):
+        return Map.objects.filter(map_date__lte=timezone.now())
+
 class IndexView(generic.ListView):
     returnlist = []
     mapname = template.MapDoc.new_map.source
@@ -77,15 +84,6 @@ class CodesView(generic.ListView):
 
     def get_queryset(self):
         return self.returnlist
-
-class TemplateView(generic.ListView):
-    model = Map
-    template_name = 'scenebuilder/templates.html'
-    context_object_name = 'all_scenes_list'
-    map_id = 1
-
-    def get_queryset(self):
-        return Map.objects.get(id=self.map_id).scene_set.all()
 
 class BuildYourOwnView(generic.ListView):
     returnlist = []

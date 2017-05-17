@@ -1,15 +1,13 @@
 {% extends "scenebuilder/base.html" %}
 {% block content %}
-{% if all_scenes_list %}
-<h2>Scenes for Map</h2>
-
+<h2>Scenes for map: {{ map.map_name }}</h2>
+<p>Created by: {{ map.map_author }}</p>
+<p>Date: {{ map.map_date }}</p>
+<hr>
 <ul>
-    {% for scene in all_scenes_list %}
+    {% for scene in map.scene_set.all %}
     <p>{{ scene }}</p>
     {% endfor %}
 </ul>
-{% else %}
-<p>No maps are available.</p>
-{% endif %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 {% endblock %}
