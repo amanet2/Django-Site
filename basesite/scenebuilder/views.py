@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.utils import timezone
 from .custom import template
-from .models import Map
+from .models import Map, Scene
 import os
 from django.conf import settings
 from django.http import HttpResponse
@@ -41,6 +41,13 @@ class DetailView(generic.DetailView):
         """
         return Map.objects.filter(map_date__lte=timezone.now())
 
+class TemplateView(generic.DetailView):
+    model = Map
+    template_name = 'scenebuilder/templates.html'
+
+    def get_queryset(self):
+        return Map.objects.filter(map_date__lte=timezone.now())
+
 class IndexView(generic.ListView):
     returnlist = []
     mapname = template.MapDoc.new_map.source
@@ -49,25 +56,6 @@ class IndexView(generic.ListView):
         returnlist.append(f'Scene {mapname}/{scene.name}')
 
     template_name = 'scenebuilder/index.html'
-    context_object_name = 'scene_template'
-
-    def get_queryset(self):
-        return self.returnlist
-
-class TemplateView(generic.ListView):
-    returnlist = []
-    scene_grids = [
-        template.MapDoc.scene_grid0,
-        template.MapDoc.scene_grid1,
-        template.MapDoc.scene_grid2
-    ]
-    i=0
-    for scene in template.MapDoc.new_map.scenes:
-        returnlist.append(scene.name)
-        returnlist.append(scene_grids[i])
-        i+=1
-
-    template_name = 'scenebuilder/templates.html'
     context_object_name = 'scene_template'
 
     def get_queryset(self):
@@ -99,8 +87,9 @@ class CodesView(generic.ListView):
 
 class BuildYourOwnView(generic.ListView):
     returnlist = []
-    for var in template.MapDoc.new_map.obj_defs:
-        returnlist.append(var)
+    obj_map = template.MapDoc.new_map.obj_defs
+    for var in obj_map:
+        returnlist.append(f'{var}-{obj_map[var]}')
 
     template_name = 'scenebuilder/buildyourown.html'
     context_object_name = 'scene_template'

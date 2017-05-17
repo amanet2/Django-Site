@@ -2,6 +2,7 @@ class Map:
     def __init__(self, source):
         self.source = source
         self.scenes = []
+        self.scene_grids = []
         self.obj_refs={}
         self.obj_codes={}
         self.scene_size = 3000
