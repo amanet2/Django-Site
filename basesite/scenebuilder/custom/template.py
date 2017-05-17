@@ -59,7 +59,7 @@ class MapDoc():
 
     # =====
 #
-#     scene0 = Scene('test-scene1','dungeonBackground.jpg',new_map.scene_size,new_map.scene_size)
+    scene0 = Scene('test-scene1','maps/custom/dungeonBackground.jpg',new_map.scene_size,new_map.scene_size)
 #
 #     scene_grid0 = '''
 # -,-,-,-,-,-,-,-,-,0,0,0,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,
@@ -100,4 +100,4 @@ class MapDoc():
 
     # =====
 
-    # new_map.scenes.append(scene0)
+    new_map.scenes.append(scene0)
