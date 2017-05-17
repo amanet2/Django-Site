@@ -6,6 +6,7 @@ from .models import Map, Scene
 import os
 from django.conf import settings
 from django.http import HttpResponse
+from django.http import Http404
 
 # Create your views here.
 def index(request):
@@ -15,6 +16,7 @@ def index(request):
 
 def download(request,pk):
     map = get_object_or_404(Map, pk=pk)
+    print(map.map_path)
 
     file_path = os.path.join(settings.MEDIA_ROOT, f'downloadable_maps/{map.map_name}.map')
     if os.path.exists(file_path):
@@ -22,7 +24,7 @@ def download(request,pk):
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
-    return HttpResponse
+    raise Http404
 
 class AllMapsView(generic.ListView):
     template_name = 'scenebuilder/allmaps.html'
