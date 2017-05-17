@@ -10,12 +10,13 @@ class MapAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,               {'fields': ['map_name']}),
         ('Map Author', {'fields': ['map_author']}),
-        ('Date information', {'fields': ['map_date'], 'classes': ['collapse']}),
+        ('Date information', {'fields': ['map_date']}),
+        ('File information', {'fields': ['map_path']}),
     ]
     inlines = [SceneInLine]
-    list_display = ('map_name', 'map_author', 'map_date')
+    list_display = ('map_name', 'map_author', 'map_date', 'map_path')
     list_filter = ['map_date']
-    search_fields = ['map_name','map_author']
+    search_fields = ['map_name','map_author','map_path']
 
 class SceneAdmin(admin.ModelAdmin):
     fieldsets = [

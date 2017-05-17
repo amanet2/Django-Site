@@ -6,23 +6,20 @@ from .models import Map, Scene
 import os
 from django.conf import settings
 from django.http import HttpResponse
-
-# Create your views here.
-def index(request):
-    return render(request,'scenebuilder/index.html')
+from django.http import Http404
 
 
+def download(request,pk):
+    map = get_object_or_404(Map, pk=pk)
+    print(map.map_path)
 
-def download(request, map_id):
-    map = get_object_or_404(Map, pk=map_id)
-
-    file_path = os.path.join(settings.MEDIA_ROOT, f'downloadable_maps/{map_id}.map')
+    file_path = os.path.join(settings.MEDIA_ROOT, f'downloadable_maps/{map.map_name}.map')
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
-    return HttpResponse
+    raise Http404
 
 class AllMapsView(generic.ListView):
     template_name = 'scenebuilder/allmaps.html'
@@ -36,9 +33,6 @@ class DetailView(generic.DetailView):
     template_name = 'scenebuilder/detail.html'
 
     def get_queryset(self):
-        """
-        Excludes any questions that aren't published yet.
-        """
         return Map.objects.filter(map_date__lte=timezone.now())
 
 class TemplateView(generic.DetailView):
