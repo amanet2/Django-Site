@@ -21,7 +21,7 @@ Quick Instructions
 
 ## Use Case
 1. Goes to `localhost:8000` and clicks on scenebuilder app
-1. Goes to the `Build you own` tab on top navbar
+1. Goes to the `Build your own` tab on top navbar
 1. Selects some scenery, actors, etc and places them on the grid
 
 ## Use Case
