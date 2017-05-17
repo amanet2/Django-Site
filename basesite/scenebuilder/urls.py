@@ -7,7 +7,7 @@ urlpatterns = [
     # ex: /scenebuilder/
     # url(r'^$', views.index, name='index'),
     url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^templates/$', views.TemplateView.as_view(), name='templates'),
+    url(r'^(?P<pk>[0-9]+)/scenes/$', views.TemplateView.as_view(), name='templates'),
     url(r'^dictionary/$', views.DictionaryView.as_view(), name='dictionary'),
     url(r'^objects/$', views.CodesView.as_view(), name='objects'),
     url(r'^buildyourown/$', views.BuildYourOwnView.as_view(), name='buildyourown'),
