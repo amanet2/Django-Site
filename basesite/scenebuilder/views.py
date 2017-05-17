@@ -79,11 +79,13 @@ class CodesView(generic.ListView):
         return self.returnlist
 
 class TemplateView(generic.ListView):
+    model = Map
     template_name = 'scenebuilder/templates.html'
     context_object_name = 'all_scenes_list'
+    map_id = 1
 
     def get_queryset(self):
-        return Scene.objects.all()
+        return Map.objects.get(id=self.map_id).scene_set.all()
 
 class BuildYourOwnView(generic.ListView):
     returnlist = []
