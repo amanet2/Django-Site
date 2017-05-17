@@ -15,8 +15,8 @@ def index(request):
 
 def download(request,pk):
     map = get_object_or_404(Map, pk=pk)
-    path=map.map_path
-    file_path = os.path.join(settings.MEDIA_ROOT, path)
+
+    file_path = os.path.join(settings.MEDIA_ROOT, f'downloadable_maps/{map.map_name}.map')
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
