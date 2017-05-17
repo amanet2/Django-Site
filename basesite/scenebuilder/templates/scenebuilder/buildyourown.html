@@ -44,19 +44,18 @@ var grid = clickableGrid(30,30,function(el,row,col,i){
     }
     else {
         cell_img.src="/static/images/"+selected_rsc;
-    }
 
-    if(selected_name == "enemy"){
-        el.className='occupied_enemy';
+        if(selected_name == "enemy")
+            el.className='occupied_enemy';
+        else if(selected_name == "big_red")
+            el.className='occupied_bigred';
+        else if(selected_name.includes("tree"))
+            el.className='occupied_clip';
+        else if(selected_name.includes("scenery"))
+            el.className='occupied_noclip';
+        else if(selected_name.includes("portal"))
+            el.className='occupied_portal';
     }
-    else if(selected_name == "big_red")
-        el.className='occupied_bigred';
-    else if(selected_name.includes("scenery"))
-        el.className='occupied_noclip';
-    else if(selected_name.includes("portal"))
-        el.className='occupied_portal';
-    else
-        el.className='empty';
 });
 
 document.body.appendChild(grid);
