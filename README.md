@@ -14,9 +14,9 @@ Quick Instructions
 
 ## Use Case
 1. Goes to `localhost:8000/admin` and login
-1. Creates a new Map called 'topdown_template' and saves
+1. Creates a new Map called `topdown_template` and saves
 1. Goes to `localhost:8000/scenebuilder`
-1. Finds the 'topdown_template' map and clicks `download`
+1. Finds the `topdown_template` map and clicks `download`
 1. `topdown_template.map` will start to download
 
 ## Use Case
@@ -29,9 +29,9 @@ Quick Instructions
 1. Generates mapfile `custom.map`
 1. Adds it to the `basesite/downloadable_maps` folder
 1. Goes to `localhost:8000/admin` and login
-1. Creates a new Map called 'custom' and saves
+1. Creates a new Map called `custom` and saves
 1. Goes to `localhost:8000/scenebuilder`
-1. Finds the 'custom' map and clicks `download`
+1. Finds the `custom` map and clicks `download`
 1. `custom.map` will start to download
 
 ## More instructions
