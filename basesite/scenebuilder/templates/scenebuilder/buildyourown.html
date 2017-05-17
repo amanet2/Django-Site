@@ -4,13 +4,10 @@
     Every map for Game-Engine-Red can be split
     up into a set of scenes, which can be manipulated
     and switched between dynamically and instantly.
-    The python mapmaker generates mapfiles for the
-    Java-based engine to consume.
 </h3>
 {% if scene_template %}
 <ul></ul>
 <h2>Build your own scene grid for Map: custom</h2>
-<h3>Python mapmaker uses these grids to generate a mapfile</h3>
 <select size="4" id="selectiontable">
     {% for scene in scene_template %}
     <option>{{ scene|linebreaksbr }}</option>
@@ -28,13 +25,10 @@ var grid = clickableGrid(30,30,function(el,row,col,i){
     var selected_obj = objects.options[ objects.selectedIndex ].value;
     var cell_img = el.appendChild(document.createElement('img'));
 
-    var map = {"enemy":"/static/images/bigRed180_evil.png"}
-
     var selected_name = selected_obj.split("-")[0];
     console.log(selected_name);
     var selected_rsc = selected_obj.split("-")[1];
     console.log(selected_rsc);
-
 
     if(classname != 'empty') {
         el.className = 'empty';
