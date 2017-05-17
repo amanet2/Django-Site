@@ -1,16 +1,15 @@
 {% extends "scenebuilder/base.html" %}
 {% block content %}
-{% if scene_template %}
-<h3><a href="/scenebuilder/objects">What are these codes?</a></h3>
-<h2>Scene grid templates for Map: custom</h2>
-<h3>Python mapmaker uses these grids to generate a mapfile</h3>
-{% for scene in scene_template %}
+{% if all_scenes_list %}
+<h2>Scenes for Map</h2>
+
 <ul>
-    <hr>
-    <p>{{ scene|linebreaksbr }}</p>
+    {% for scene in all_scenes_list %}
+    <p>{{ scene }}</p>
+    {% endfor %}
 </ul>
-{% endfor %}
 {% else %}
-<p>No templates are available.</p>
+<p>No maps are available.</p>
 {% endif %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 {% endblock %}

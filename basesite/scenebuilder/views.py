@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.utils import timezone
 from .custom import template
-from .models import Map
+from .models import Map, Scene
 import os
 from django.conf import settings
 from django.http import HttpResponse
@@ -79,13 +79,11 @@ class CodesView(generic.ListView):
         return self.returnlist
 
 class TemplateView(generic.ListView):
-    returnlist = []
-
     template_name = 'scenebuilder/templates.html'
-    context_object_name = 'scene_template'
+    context_object_name = 'all_scenes_list'
 
     def get_queryset(self):
-        return self.returnlist
+        return Scene.objects.all()
 
 class BuildYourOwnView(generic.ListView):
     returnlist = []
