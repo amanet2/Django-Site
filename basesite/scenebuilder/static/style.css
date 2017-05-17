@@ -28,7 +28,7 @@ img {
 .grid { margin:1em auto; border-collapse:collapse }
 .grid td {
     cursor:pointer;
-    width:30px; height:30px;
+    width:20px; height:20px;
     border:1px solid #7cfc00;
     text-align:center;
     padding: 0px; margin: 0px;
